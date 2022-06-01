@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     //
-    public function details(){
-        $name="Ahsan Ahmed";
-        $id = "22434";
+    public function details($id){
+        $name="Student $id";
         $dob ="4456";
         return view('student.details')
         ->with('n',$name)

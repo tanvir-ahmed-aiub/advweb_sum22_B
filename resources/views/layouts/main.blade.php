@@ -1,9 +1,7 @@
 <html>
     <head></head>
     <body>
-        <div>
-            <h1>Fixed Content</h1>
-        </div>
+        @include('includes.topbar')
         <div>
             @yield('content')
         </div>

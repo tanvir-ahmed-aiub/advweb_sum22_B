@@ -14,7 +14,7 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/',[PagesController::class,'home']);
-Route::get('/about',[PagesController::class,'about']);
-Route::get('/student/list',[StudentController::class,'list']);
-Route::get('/student/details',[StudentController::class,'details']);
+Route::get('/',[PagesController::class,'home'])->name('home');
+Route::get('/about',[PagesController::class,'about'])->name('about');
+Route::get('/student/all',[StudentController::class,'list'])->name('student.list');
+Route::get('/student/details/{id}/info',[StudentController::class,'details'])->name('student.details');
