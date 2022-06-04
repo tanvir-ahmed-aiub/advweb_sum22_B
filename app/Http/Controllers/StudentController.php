@@ -29,4 +29,28 @@ class StudentController extends Controller
         return view('student.list')->with('students',$students);
 
     }
+    function create(){
+        return view('student.create');
+    }
+    function createSubmit(Request $req){
+        $this->validate($req,
+            [
+                "name"=>"required|max:10|min:3",
+                "id"=>"required|regex:/^([0-9]{2}-[0-9]{5}-[1-3]{1})+$/i",
+                "dob"=>"required",
+                "email"=>"required|",
+                "password"=>"required|min:8",
+                "conf_password"=>"required|min:8|same:password"
+            ],
+        
+            [
+                "name.required"=>"Please provide your name",
+                "name.max"=>"Name should not exceed 10 characters",
+
+                
+            ]);
+
+        return "Form submitted";
+        
+    }
 }
