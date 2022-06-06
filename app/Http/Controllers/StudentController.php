@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -16,7 +17,7 @@ class StudentController extends Controller
         ->with('dob',$dob);
     }
     public function list(){
-        $students = [];
+        /*$students = [];
         for($i=1;$i<=10;$i++){
             $st = array(
                 "id"=>$i,
@@ -24,7 +25,11 @@ class StudentController extends Controller
                 "dob"=>"1212"
             );
             $students[] = (object)$st;
-        }
+        }*/
+        $students = Student::all(); //select * from students
+        //$students = Student::where('id','>=',2)->first();
+        //return $students;
+        
         
         return view('student.list')->with('students',$students);
 
@@ -49,7 +54,11 @@ class StudentController extends Controller
 
                 
             ]);
-
+            $st = new Student();
+            $st->name = $req->name;
+            $st->email =$req->email;
+            $st->dob = $req->dob;
+            $st->save();
         return "Form submitted";
         
     }
