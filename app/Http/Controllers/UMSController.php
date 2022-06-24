@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UMSStudent;
 use App\Models\UMSDepartment;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendInvitation;
 
 class UMSController extends Controller
 {
+    function mail(){
+        Mail::to([''])->send(new SendInvitation("Demo Mail","1","Tanvir CS AIUB"));
+    }
+
     //
     function list(){
         $students = UMSStudent::select('name','d_id')->get();
@@ -27,8 +33,12 @@ class UMSController extends Controller
     }
     function createSubmit(Request $req){
         $this->validate($req,[
-            "id"=>"required|unique:students_info,user_id"
+            "id"=>"required|unique:students_info,user_id",
+            "pro_pic"=>"mimes:jpg,png,jpeg"
         ]);
+        //$orgName = $req->file('pro_pic')->getClientOriginalName();
+        $name = $req->id."_".time().".".$req->file('pro_pic')->getClientOriginalExtension();
+        $req->file('pro_pic')->storeAs('profile_images',$name);
 
         $s = new UMSStudent();
         $s->name = $req->name;

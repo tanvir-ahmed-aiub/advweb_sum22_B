@@ -1,5 +1,5 @@
 <h1>{{Session::get('msg')}}</h1>
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
         {{@csrf_field()}}
         Name: <input type="text" name="name" placeholder="Name" value="{{old('name')}}"><br>
         @error('name')
@@ -19,6 +19,10 @@
         @enderror
         Confirm Password: <input type="password" name="conf_password"><br>
         @error('conf_password')
+            {{$message}}<br>
+        @enderror
+        <input type="file" name="pro_pic">
+        @error('pro_pic')
             {{$message}}<br>
         @enderror
         <input type="submit" value="Create">

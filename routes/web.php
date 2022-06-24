@@ -40,4 +40,5 @@ Route::get('/logout',function(){
     session()->flash('msg','Sucessfully Logged out');
     return redirect()->route('ums.login');
 })->name('logout');
+Route::get('/mail',[UMSController::class,'mail']);
 
